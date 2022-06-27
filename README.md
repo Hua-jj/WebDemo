@@ -1,6 +1,7 @@
 # frontend
 
 ## Project setup
+This project contains `axios`, `ant-design-vue`
 ```
 npm install
 ```
