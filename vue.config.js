@@ -1,25 +1,37 @@
+const { VantResolver } = require('unplugin-vue-components/resolvers');
+const ComponentsPlugin = require('unplugin-vue-components/webpack');
 module.exports = {
     publicPath: './',
     outputDir: 'dist',
     lintOnSave: false,
-  
     configureWebpack: {
       resolve: {
         alias: {
           'assets': '@/assets',
           'components': '@/components',
           'views': '@/views',
-          'network': '@/network'
+          'router': '@/router'
         }
       },
+      plugins: [
+        ComponentsPlugin({
+          resolvers: [VantResolver()],
+        }),
+      ],
     },
     devServer: {
       proxy: {
-        '/api': {
-          target: 'http://localhost:8081/',
+        '/api': {   // 拦截以api开头请求路径
+          target: 'http://127.0.0.1:8081',
           changeOrigin: true,
           ws: true,
+          // pathRewrite: {
+          //   '^/api': ''
+          // }
         }
       }
     }
 }
+
+
+
