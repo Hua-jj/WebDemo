@@ -1,7 +1,7 @@
 /*
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-27 13:00:32
- * @LastEditTime: 2022-06-28 19:50:44
+ * @LastEditTime: 2022-06-29 20:21:28
  * @FilePath: /WebDemo/src/router/index.js
  * @Description: 
  * 
@@ -16,9 +16,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/choice',
-    name: 'Choice',
-    component: () => import('@/views/Choice.vue')
+    path: '/Pack',
+    name: 'Pack',
+    component: () => import('@/views/Pack.vue')
+  },
+  {
+    path: '/confirm',
+    name: 'Confirm',
+    component: () => import('@/views/Confirm.vue')
   },
   {
     path: '/profile',

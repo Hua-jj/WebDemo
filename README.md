@@ -1,5 +1,13 @@
 # frontend
 
+## Remain to Update
+
+1. validation: pack number, expired time
+
+2. password
+
+3. profile revise?
+
 ## Project setup
 This project contains `axios`, `ant-design-vue`
 ```

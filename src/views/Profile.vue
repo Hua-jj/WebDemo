@@ -1,7 +1,7 @@
 <!--
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-27 13:00:32
- * @LastEditTime: 2022-06-28 19:52:13
+ * @LastEditTime: 2022-06-29 21:57:06
  * @FilePath: /WebDemo/src/views/Profile.vue
  * @Description: 
  * 
@@ -10,23 +10,30 @@
 <template>
   <div class="profile">
     <!-- 可以使用 CellGroup 作为容器 -->
-    <div class="exchange-cell">
-      <van-cell-group inset>
-        <van-field v-model="key" label="卡号" placeholder="请输入4位卡号" maxlength="16" clearable="true"/>
-        <van-field v-model="password" type="password" label="卡密" placeholder="请输入4位卡密" maxlength="16" clearable="true"/>
-      </van-cell-group>
-    </div>
-    <div class="sumit-btn">
-      <van-button type="primary" @click="exchange">兑换</van-button>
+    <van-nav-bar title="兑换详情" />
+    <van-cell-group inset>
+      <van-cell title="兑换码" :value="redemption.key" />
+      <van-cell title="隶属活动" :value="redemption.activity" />
+      <van-cell title="兑换礼包" :value="redemption.pack_name" :label="redemption.pack_description" />
+      <van-cell title="兑换时间" :value="redemption.redeem_time" />
+      <van-cell title="收件人" :value="redemption.receiver" />
+      <van-cell title="收件地址" :value="redemption.address" />
+      <van-cell title="快递公司" :value="redemption.delivery_company" />
+      <van-cell title="快递单号" :value="redemption.parcel_index" />
+    </van-cell-group>
+    <div style="margin: 16px;">
+      <van-button round block type="primary" native-type="submit" @click="onReturnIndex">
+        返回首页
+      </van-button>
     </div>
 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
 import qs from 'qs'
+
 export default {
   name: 'Profile',
   // setup() {
@@ -36,40 +43,24 @@ export default {
   // },
   data() {
     return {
-      key: '',
-      password: ''
+      redemption: '',
     }
   },
   methods: {
-    exchange(event) {
-      console.log(this.key);
-      console.log(event.target);
-      this.$axios.post('api/redemptions', qs.stringify({
-        'key':this.key,
-        'password': this.password
-      })).then( res => {
-        console.log(res.data);
-      })
+    onReturnIndex() {
+      this.$router.push({name:'Home'})
     }
   },
-  // components: {
-  //   HelloWorld
-  // }
+  created() {
+    this.$axios.get('api/redemptions').then(res => {
+      console.log(res.data);
+      let { message, data, code } = res.data;
+      this.redemption = data
+    })
+  }
+
 }
 </script>
 
 <style>
-.home {
-  
-}
-
-.exchange-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-.submit-btn {
-  margin-top: 10px;
-}
 </style>

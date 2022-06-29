@@ -22,7 +22,7 @@ module.exports = {
     devServer: {
       proxy: {
         '/api': {   // 拦截以api开头请求路径
-          target: 'http://127.0.0.1:8081',
+          target: 'http://106.14.246.145:9999',
           changeOrigin: true,
           ws: true,
           // pathRewrite: {

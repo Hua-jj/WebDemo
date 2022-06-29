@@ -1,8 +1,13 @@
+<!--
+ * @Author: mrk-lyz mrk_lanyouzi@yeah.net
+ * @Date: 2022-06-27 13:00:32
+ * @LastEditTime: 2022-06-29 15:19:26
+ * @FilePath: /WebDemo/src/App.vue
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by mrk-lyz mrk_lanyouzi@yeah.net, All Rights Reserved. 
+-->
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view/>
 </template>
 
