@@ -10,60 +10,90 @@
 <template>
     <div class="confirm-container">
         <van-nav-bar title="确认订单信息" left-text="返回" left-arrow @click-left="onClickLeft" />
+        <van-cell-group>
+            <van-cell title="您兑换的是" :value="pack.name" :label="pack.description" />
+        </van-cell-group>
+
+        <van-divider>收件信息</van-divider>
         <van-form @submit="onSubmit">
             <van-address-edit :area-list="areaList" :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSubmit"
-                save-button-text="确认" detail-maxlength="100" />
+                save-button-text="提交订单" detail-maxlength="100" />
         </van-form>
-
     </div>
 </template>
 
 <script>
-import { areaList } from '@vant/area-data';
-import qs from 'qs'
+import { areaList } from "@vant/area-data";
+import qs from "qs";
 export default {
-    name: 'confirm',
+    name: "confirm",
     data() {
         return {
-            pack_id: '',
-            receiver: '',
-            phone: '',
+            pack_id: "",
+            pack: "",
+            receiver: "",
+            phone: "",
             showArea: false,
             areaList: areaList,
-        }
+        };
     },
     methods: {
         onSubmit(value) {
             console.log(this.pack_id);
-            console.log(value.province + ' ' + value.city + ' ' + value.county + ' ' + value.addressDetail);
-            this.$axios.put('api/redemptions', qs.stringify({
-                'pack_id': this.pack_id,
-                'receiver': value.name,
-                'phone': value.tel,
-                'address': value.province + ' ' + value.city + ' ' + value.county + ' ' + value.addressDetail
-            })).then(res => {
-                console.log(res.data);
-                let { message, data, code } = res.data;
-                if (code == 200) {
-                    this.$dialog.alert({ 'message': message }).then(() => {
-                        this.$router.push({ name: 'Profile' })
+            console.log(
+                value.province +
+                " " +
+                value.city +
+                " " +
+                value.county +
+                " " +
+                value.addressDetail
+            );
+            this.$axios
+                .put(
+                    "api/redemptions",
+                    qs.stringify({
+                        pack_id: this.pack_id,
+                        receiver: value.name,
+                        phone: value.tel,
+                        address:
+                            value.province +
+                            " " +
+                            value.city +
+                            " " +
+                            value.county +
+                            " " +
+                            value.addressDetail,
                     })
-                }
-            })
-
+                )
+                .then((res) => {
+                    console.log(res.data);
+                    let { message, data, code } = res.data;
+                    if (code == 200) {
+                        this.$dialog.alert({ message: message }).then(() => {
+                            this.$router.push({ name: "Profile" });
+                        });
+                    }
+                });
         },
-        onConfirmArea() {
-
-        },
+        onConfirmArea() { },
         onClickLeft() {
-            this.$router.go(-1)
-        }
+            this.$router.go(-1);
+        },
     },
     created() {
-        this.pack_id = this.$route.params.pack_id
-    }
-}
-
+        this.pack_id = this.$route.params.pack_id;
+        this.$axios.get('api/packs', {
+            params: {
+                'pack_id': this.pack_id
+            }
+        }).then(res=> {
+            let { message, data, code } = res.data;
+            console.log(data);
+            this.pack = data;
+        })
+    },
+};
 </script>
 
 <style>

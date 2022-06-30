@@ -15,6 +15,7 @@ import axios from 'axios'
 import { Swipe, SwipeItem } from 'vant';
 import { NavBar } from 'vant';
 import { Form} from 'vant';
+import { Skeleton } from 'vant';
 
 // axios.defaults.baseURL = '/api'
 
@@ -48,5 +49,7 @@ app.use(NavBar)
 app.use(Form);
 app.use(Field);
 app.use(CellGroup);
+app.use(Skeleton);
+
 app.config.globalProperties.$axios = axios
 app.mount('#app')

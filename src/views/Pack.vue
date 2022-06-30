@@ -61,8 +61,7 @@ export default {
         }
     },
     created() {
-        this.$axios.get('api/packs', {
-        }).then(res => {
+        this.$axios.get('api/packs').then(res => {
             let { message, data, code } = res.data;
             console.log(res.data);
             if (code == 200) {

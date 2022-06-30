@@ -8,20 +8,23 @@
  * Copyright (c) 2022 by mrk-lyz mrk_lanyouzi@yeah.net, All Rights Reserved. 
 -->
 <template>
-    <van-nav-bar title="兑换平台" />
-    <div class="exchange-cell">
-      <van-cell-group inset size="large">
-        <van-field v-model="key" label="卡号" placeholder="请输入4位卡号" maxlength=16 :formatter="formatter"
-          format-trigger="onChange" clearable center />
-        <van-field v-model="password" type="password" label="卡密" placeholder="请输入4位卡密" :formatter="formatter"
-          format-trigger="onChange" maxlength=16 clearable center />
-      </van-cell-group>
-    </div>
-        <div style="margin: 16px;">
-            <van-button round block type="primary" native-type="submit" @click="selectPack">
-                兑换
-            </van-button>
-        </div>
+<div class="home">
+  <van-nav-bar title="欢迎登录兑换平台" />
+  <div class="exchange-cell">
+    <van-cell-group inset size="large">
+      <van-field v-model="key" label="卡号" placeholder="请输入4位卡号" maxlength=16 :formatter="formatter"
+        format-trigger="onChange" clearable center />
+      <van-field v-model="password" type="password" label="卡密" placeholder="请输入4位卡密" :formatter="formatter"
+        format-trigger="onChange" maxlength=16 clearable center />
+    </van-cell-group>
+  </div>
+  <div style="margin: 16px;">
+    <van-button round block type="primary" native-type="submit" @click="onConfirm">
+      兑换
+    </van-button>
+  </div>
+</div>
+
 
 </template>
 
@@ -74,7 +77,7 @@ export default {
 
 <style>
 .exchange-cell {
-  margin-top: 50%;
+  margin-top: 45%;
   /* display: flex;
   justify-content: center;
   align-items: center; */

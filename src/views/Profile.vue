@@ -21,9 +21,12 @@
       <van-cell title="快递公司" :value="redemption.delivery_company" />
       <van-cell title="快递单号" :value="redemption.parcel_index" />
     </van-cell-group>
-    <div style="margin: 16px;">
-      <van-button round block type="primary" native-type="submit" @click="onReturnIndex">
+    <div style="margin: 16px;display: flex;justify-content: space-around;">
+      <van-button round size="large" type="primary" native-type="submit" @click="onReturnIndex">
         返回首页
+      </van-button>
+      <van-button round size="large" type="default" native-type="submit" @click="onContactUs">
+        联系我们
       </van-button>
     </div>
 
@@ -49,6 +52,12 @@ export default {
   methods: {
     onReturnIndex() {
       this.$router.push({name:'Home'})
+    },
+    onContactUs() {
+      this.$dialog.alert({
+        title: '联系我们',
+        message: '如您有任何疑问或需要帮助,欢迎联系我们:\n电话:XXXXXX   工作日 9:00- 17:00\n邮箱:XXXXXXX  (1-2工作日内回复)'
+      })
     }
   },
   created() {
