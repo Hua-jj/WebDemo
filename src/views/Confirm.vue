@@ -73,6 +73,8 @@ export default {
                         this.$dialog.alert({ message: message }).then(() => {
                             this.$router.push({ name: "Profile" });
                         });
+                    } else {
+                        this.$dialog.alert({message:message});
                     }
                 });
         },

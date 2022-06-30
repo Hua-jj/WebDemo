@@ -31,6 +31,7 @@
 <script>
 // @ is an alias to /src
 
+import { interfaceDeclaration } from '@babel/types';
 import qs from 'qs'
 export default {
   name: 'Home',
@@ -56,7 +57,8 @@ export default {
         let { message, data, code } = res.data;
         console.log(message);
         if (code == 200) {  // 初次使用，跳转选择页
-          this.$router.push('/pack')
+          // console.log(data);
+          this.$router.push({name: 'Pack', params: {activity_id: data}})
         } else if (code == 201) { // 已被兑换，访问详情页
           this.$router.push('/profile')
         } else {            // 帐号或密码错误
