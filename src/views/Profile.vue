@@ -1,7 +1,7 @@
 <!--
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-27 13:00:32
- * @LastEditTime: 2022-06-29 21:57:06
+ * @LastEditTime: 2022-07-01 11:03:15
  * @FilePath: /WebDemo/src/views/Profile.vue
  * @Description: 
  * 
@@ -18,14 +18,24 @@
       <van-cell title="兑换时间" :value="redemption.redeem_time" />
       <van-cell title="收件人" :value="redemption.receiver" />
       <van-cell title="收件地址" :value="redemption.address" />
+      <van-cell title="邮寄状态">
+        <template #value>
+          <div v-if="redemption.is_delivered">
+            <van-tag type="success" size="medium">已发出</van-tag>
+          </div>
+          <div v-else>
+            <van-tag type="warning" size="medium">待发出</van-tag>
+          </div>
+        </template>
+      </van-cell>
       <van-cell title="快递公司" :value="redemption.delivery_company" />
       <van-cell title="快递单号" :value="redemption.parcel_index" />
     </van-cell-group>
-    <div style="margin: 16px;display: flex;justify-content: space-around;">
-      <van-button round size="large" type="primary" native-type="submit" @click="onReturnIndex">
+    <div style="margin: 16px;display: flex;justify-content: space-evenly;">
+      <van-button round  type="primary" native-type="submit" @click="onReturnIndex">
         返回首页
       </van-button>
-      <van-button round size="large" type="default" native-type="submit" @click="onContactUs">
+      <van-button round  type="default" native-type="submit" @click="onContactUs">
         联系我们
       </van-button>
     </div>
@@ -51,7 +61,7 @@ export default {
   },
   methods: {
     onReturnIndex() {
-      this.$router.push({name:'Home'})
+      this.$router.push({ name: 'Home' })
     },
     onContactUs() {
       this.$dialog.alert({
