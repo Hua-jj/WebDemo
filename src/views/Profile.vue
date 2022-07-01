@@ -1,7 +1,7 @@
 <!--
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-27 13:00:32
- * @LastEditTime: 2022-07-01 11:03:15
+ * @LastEditTime: 2022-07-01 20:49:59
  * @FilePath: /WebDemo/src/views/Profile.vue
  * @Description: 
  * 
@@ -14,7 +14,13 @@
     <van-cell-group inset>
       <van-cell title="兑换码" :value="redemption.key" />
       <van-cell title="隶属活动" :value="redemption.activity" />
-      <van-cell title="兑换礼包" :value="redemption.pack_name" :label="redemption.pack_description" />
+      <van-cell title="兑换礼包" :value="redemption.pack_name">
+        <template v-slot:label>
+          <div v-for="item in redemption.items">
+            <span style="display: block;">{{ item }}</span>
+          </div>
+        </template>
+      </van-cell>
       <van-cell title="兑换时间" :value="redemption.redeem_time" />
       <van-cell title="收件人" :value="redemption.receiver" />
       <van-cell title="收件地址" :value="redemption.address" />
@@ -32,10 +38,10 @@
       <van-cell title="快递单号" :value="redemption.parcel_index" />
     </van-cell-group>
     <div style="margin: 16px;display: flex;justify-content: space-evenly;">
-      <van-button round  type="primary" native-type="submit" @click="onReturnIndex">
+      <van-button round type="primary" native-type="submit" @click="onReturnIndex">
         返回首页
       </van-button>
-      <van-button round  type="default" native-type="submit" @click="onContactUs">
+      <van-button round type="default" native-type="submit" @click="onContactUs">
         联系我们
       </van-button>
     </div>
@@ -75,6 +81,9 @@ export default {
       console.log(res.data);
       let { message, data, code } = res.data;
       this.redemption = data
+      this.redemption.pack_description = this.redemption.pack_description.replaceAll(";", "；")
+      this.redemption.items = this.redemption.pack_description.split("；")
+      console.log(this.redemption.items);
     })
   }
 

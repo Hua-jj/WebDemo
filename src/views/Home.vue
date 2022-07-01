@@ -1,7 +1,7 @@
 <!--
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-27 13:00:32
- * @LastEditTime: 2022-06-29 22:07:50
+ * @LastEditTime: 2022-07-01 19:53:18
  * @FilePath: /WebDemo/src/views/Home.vue
  * @Description: 
  * 
@@ -58,7 +58,7 @@ export default {
         console.log(message);
         if (code == 200) {  // 初次使用，跳转选择页
           // console.log(data);
-          this.$router.push({name: 'Pack', params: {activity_id: data}})
+          this.$router.push({name: 'Activity', query: {id: data}})
         } else if (code == 201) { // 已被兑换，访问详情页
           this.$router.push('/profile')
         } else {            // 帐号或密码错误
