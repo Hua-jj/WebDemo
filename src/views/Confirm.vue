@@ -1,7 +1,7 @@
 <!--
  * @Author: mrk-lyz mrk_lanyouzi@yeah.net
  * @Date: 2022-06-28 12:55:36
- * @LastEditTime: 2022-07-01 20:46:03
+ * @LastEditTime: 2022-07-28 19:22:56
  * @FilePath: /WebDemo/src/views/Confirm.vue
  * @Description: 
  * 
@@ -119,6 +119,9 @@ export default {
             this.pack.items = this.pack.description.split("；")
             console.log(this.pack.items);
         })
+    },
+    mounted() {
+        
     },
 };
 </script>
